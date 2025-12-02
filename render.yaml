@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: news-api
+    env: node
+    plan: free
+    rootDir: apps/api
+    buildCommand: npm install --no-audit --no-fund
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: POSTGRES_HOST
+        fromSecret: POSTGRES_HOST
+      - key: POSTGRES_PORT
+        fromSecret: POSTGRES_PORT
+      - key: POSTGRES_USER
+        fromSecret: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+        fromSecret: POSTGRES_PASSWORD
+      - key: POSTGRES_DB
+        fromSecret: POSTGRES_DB
+      - key: REDIS_URL
+        fromSecret: REDIS_URL
+      - key: PORT
+        value: "3000"
+
